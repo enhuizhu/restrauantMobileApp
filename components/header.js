@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import appStyles from '../constants/styles';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
 class Header extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>This is header</Text>
+                <Image source={require('../images/logo.png')} style={styles.logoStyle}/>
             </View>
         );
     }
@@ -13,10 +14,16 @@ class Header extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'green',
-        paddingTop: 20,
+        backgroundColor: appStyles.brandColor,
+        paddingTop: 30,
+        paddingBottom: 10,
         width: '100%',
         alignItems: 'center',
+    },
+
+    logoStyle: {
+        width: 50,
+        height: 50
     },
 
     text: {

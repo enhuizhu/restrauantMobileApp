@@ -5,7 +5,15 @@ import Footer from './components/footer';
 import TestA from './components/test';
 import DynamicImage from './components/dynamicImage';
 
-export default class App extends React.Component {
+import {
+  StackNavigator,
+} from 'react-navigation';
+
+class HomeScreen extends React.Component {
+    static navigationOptions = {
+        title: 'Welcome',
+    };
+
     constructor(props) {
         super(props);
       
@@ -15,42 +23,15 @@ export default class App extends React.Component {
     }
   
     render() {
+      const { navigate } = this.props.navigation;
+      
       return (
         <View style={{flex: 1}}>
             <Header></Header>
             
             <ScrollView style={styles.container}>
-              <TestA></TestA>
-              <DynamicImage></DynamicImage>
-              <Text>Open up App.js to start working on your app!</Text>
-              <Text>Changes you make will automatically reload.</Text>
-              <Text>Shake your phone to open the developer menu.</Text>
-              <TextInput onChangeText={text => this.setState({text})} style={{height: 40}} placeholder={'please input your name'}></TextInput>
-              <Text>{this.state.text}</Text>
-              
-              <TouchableHighlight style={styles.buttonContainer} onPress={() => {Alert.alert('hello');}}>
-                  <Text style={{color: 'white', padding: 20, textAlign: 'center'}}>it's a button</Text>
-              </TouchableHighlight>
-              
-              <View style={styles.buttonContainer}>
-                <Button title='press me' onPress={() => Alert.alert('you taped the button')} color='white'></Button>
-              </View>
-              <View style={styles.rect}>
-                <View style={{backgroundColor: 'red', width: 40, height: 40}}></View>
-                <View style={{backgroundColor: 'green', width: 40, height: 40}}></View>
-                <View style={{backgroundColor: 'yellow', width: 40, height: 40}}></View>
-              </View>
-
-              <View style={styles.rect}>
-                <View style={{backgroundColor: 'red', width: 40, height: 40}}></View>
-                <View style={{backgroundColor: 'green', width: 40, height: 40}}></View>
-                <View style={{backgroundColor: 'yellow', width: 40, height: 40}}></View>
-              </View>
-
-
-              <TouchableHighlight style={styles.buttonContainer} onPress={() => {Alert.alert('hello');}}>
-                  <Text style={{color: 'white', padding: 20, textAlign: 'center'}}>it's a button</Text>
-              </TouchableHighlight>
+              <Text>hello</Text>
+              <Button title='go to sub screen' onPress={() => navigate('subScreen')}/>
             </ScrollView>
             
             <Footer></Footer>
@@ -90,3 +71,26 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   }
 });
+
+class subScreen extends React.Component {
+    constructor(props) {
+      super(props);
+      
+    }
+
+    render() {
+        return (
+            <View>
+                  <Text>subScreen</Text>
+            </View>
+        ); 
+    }
+}
+
+
+App = StackNavigator({
+  Home: { screen: HomeScreen },
+  subScreen: {screen: subScreen}
+});
+
+export default App;
